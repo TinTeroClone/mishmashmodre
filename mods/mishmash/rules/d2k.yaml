@@ -1306,7 +1306,7 @@ d2kordosdustscout:
 		Name: Dust Scout
 	Buildable:
 		Queue: Vehicle.Shared, Vehicle.Ordos
-		Prerequisites: ~ordoslightweap
+		Prerequisites: ~ordoslightweap, ~wip
 		BuildPaletteOrder: 30
 		Description: Ordos scout vehicle
 		BuildDuration: 250

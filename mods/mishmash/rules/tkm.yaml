@@ -1,0 +1,284 @@
+#######################################
+# TKM MCV
+#######################################
+
+tkmcnst:
+	Inherits: ^ConstructionYard
+	Buildable:
+		BuildPaletteOrder: 89
+		IconPalette: chromedune
+	ProvidesPrerequisite@building.tkm:
+		Prerequisite: Building.tkm
+		Factions: tkm
+	Production:
+		Produces: Building.tkm, Support.tkm
+	ProductionQueue@Building:
+		Type: Building.tkm
+		DisplayOrder: 2
+		Factions: tkm
+	ProductionQueue@Support:
+		Type: Support.tkm
+		DisplayOrder: 6
+		Factions: tkm
+	ProductionBar@Building:
+		ProductionType: Building.tkm
+	ProductionBar@Support:
+		ProductionType: Support.tkm
+	Transforms:
+		IntoActor: tkmmcv
+	GrantConditionOnFaction@tkm:
+		Condition: tkm
+		Factions: tkm
+	IsometricSelectable:
+		DecorationHeight: 90
+	Voiced:
+		VoiceSet: UniversalConstructionYardVoice
+	RenderSprites:
+		Image: tkmcommandcenter
+
+tkmmcv:
+	Inherits: ^ConstructionVehicle
+	Buildable:
+		Queue: Vehicle.Shared, Vehicle.tkm
+		Prerequisites: ~tkmrepair_pad, ~techlevel.2, ~!global-suddendeath, ~!ai.mcv
+	Transforms:
+		IntoActor: tkmcnst
+	Voiced:
+		VoiceSet: D2kVehicleVoice
+	RenderSprites:
+		Image: tkmmcv
+	WithFacingSpriteBody:
+	-WithVoxelBody@Water:
+	-RenderVoxels:
+	-WithVoxelBody:
+
+#######################################
+# TKM Buildings
+#######################################
+	
+powrtkm:
+	Inherits: ^PowerPlant
+	Inherits@SHAPE: ^2x2Shape
+	Buildable:
+		Queue: Building.Shared, Building.tkm
+		Description: actor-napowr.description
+		Prerequisites: ~tkmcnst, ~techlevel.1
+		LocalCenterOffset: 0,-512,0
+		IconPalette: chromedune
+	Tooltip:
+		Name: Wind Trap
+	Tooltip@NoRow:
+		Name: Wind Trap
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	IsometricSelectable:
+		Class: napowr
+		DecorationHeight: 45
+	Voiced:
+		VoiceSet: PowerPlantVoice
+		Volume: 0.8
+	RenderSprites:
+		Image: tkmpowerplant
+
+tkmbarracks:
+	Inherits: ^Barracks
+	Inherits@SHAPE: ^2x2Shape
+	Buildable:
+		Queue: Building.Shared, Building.tkm
+		Description: actor-nahand.description
+		Prerequisites: ~tkmcnst, d2kpowrtkm, ~techlevel.1
+		IconPalette: chromedune
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Exit@1Shared:
+		SpawnOffset: -512,768,0
+		ExitCell: 1,2
+		Priority: 2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@2Shared:
+		SpawnOffset: -512,768,0
+		ExitCell: 0,2
+		Priority: 2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback1Shared:
+		SpawnOffset: 0,724,0
+		ExitCell: 2,2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback2Shared:
+		SpawnOffset: 0,724,0
+		ExitCell: 2,1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback3Shared:
+		SpawnOffset: 724,0,0
+		ExitCell: 2,0
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback4Shared:
+		SpawnOffset: 724,0,0
+		ExitCell: 2,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback5Shared:
+		SpawnOffset: 724,0,0
+		ExitCell: 1,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback6Shared:
+		SpawnOffset: 0,-724,0
+		ExitCell: 0,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback7Shared:
+		SpawnOffset: 0,-724,0
+		ExitCell: -1,-1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback8Shared:
+		SpawnOffset: 0,-724,0
+		ExitCell: -1,0
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback9Shared:
+		SpawnOffset: -724,0,0
+		ExitCell: -1,1
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@fallback10Shared:
+		SpawnOffset: -724,0,0
+		ExitCell: -1,2
+		ProductionTypes: Infantry.Shared, Soldier
+		RequiresCondition: !multiqueue
+	Exit@1:
+		SpawnOffset: -512,768,0
+		ExitCell: 1,2
+		Priority: 2
+		RequiresCondition: multiqueue
+	Exit@2:
+		SpawnOffset: -512,768,0
+		ExitCell: 0,2
+		Priority: 2
+		RequiresCondition: multiqueue
+	Exit@fallback1:
+		SpawnOffset: 0,724,0
+		ExitCell: 2,2
+		RequiresCondition: multiqueue
+	Exit@fallback2:
+		SpawnOffset: 0,724,0
+		ExitCell: 2,1
+		RequiresCondition: multiqueue
+	Exit@fallback3:
+		SpawnOffset: 724,0,0
+		ExitCell: 2,0
+		RequiresCondition: multiqueue
+	Exit@fallback4:
+		SpawnOffset: 724,0,0
+		ExitCell: 2,-1
+		RequiresCondition: multiqueue
+	Exit@fallback5:
+		SpawnOffset: 724,0,0
+		ExitCell: 1,-1
+		RequiresCondition: multiqueue
+	Exit@fallback6:
+		SpawnOffset: 0,-724,0
+		ExitCell: 0,-1
+		RequiresCondition: multiqueue
+	Exit@fallback7:
+		SpawnOffset: 0,-724,0
+		ExitCell: -1,-1
+		RequiresCondition: multiqueue
+	Exit@fallback8:
+		SpawnOffset: 0,-724,0
+		ExitCell: -1,0
+		RequiresCondition: multiqueue
+	Exit@fallback9:
+		SpawnOffset: -724,0,0
+		ExitCell: -1,1
+		RequiresCondition: multiqueue
+	Exit@fallback10:
+		SpawnOffset: -724,0,0
+		ExitCell: -1,2
+		RequiresCondition: multiqueue
+	Production:
+		Produces: Infantry.tkm
+	ProductionQueue:
+		Type: Infantry.tkm
+		DisplayOrder: 14
+		Factions: tkm
+	ProductionBar:
+		ProductionType: Infantry.tkm
+	RallyPoint:
+		Path: 3,3
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: tkmbarracks
+	IsometricSelectable:
+		DecorationHeight: 30
+	RenderSprites:
+		Image: tkmbarracks
+
+tkmrefinery:
+	Inherits: ^Refinery
+	Buildable:
+		Queue: Building.Shared, Building.tkm
+		Prerequisites: ~tkmcnst, d2kpowrtkm, ~!global-megawealth, ~techlevel.1, ~AIantiRush
+		IconPalette: chromedune
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 2,3
+		LocalCenterOffset: 0,0,0
+	FreeActor:
+		Actor: tkmharv
+	SmokeParticleEmitter@refinerysmoke1:
+		Offset: -1024,-512,3456
+	SmokeParticleEmitter@refinerysmoke2:
+		Offset: -64,-1280,3456
+	DockHost:
+		Type: Unload
+		DockAngle: 640
+		DockOffset: 1086,1086,0
+	-WithDockedOverlay:
+	IsometricSelectable:
+		Class: narefn
+		DecorationHeight: 90
+	RenderSprites:
+		Image: tkmrefinery
+
+#######################################
+# TKM Vehicles
+#######################################
+	
+tkmharv:
+	Inherits: ^Miner
+	Buildable:
+		Queue: Vehicle.Shared, Vehicle.tkm
+		BuildPaletteOrder: 90
+		Description: actor-cmin.description
+		Prerequisites: ~tkmrefinery
+	Tooltip:
+		Name: Ore Harvester
+	Tooltip@NoRow:
+		Name: Ore Harvester
+	Harvester:
+		BaleUnloadDelay: 2
+		EmptyCondition: harvester-empty
+	StoresResources:
+		Capacity: 20
+	DockClientManager:
+		Voice: Deliver
+	Guard:
+		Voice: Move
+	Voiced:
+		VoiceSet: D2kVehicleVoice
+	RenderSprites:
+		Image: tkmharv
+	WithFacingSpriteBody:
+	-WithHarvestOverlay:
+	RenderVoxels:
+		Image: blanktemplate
+		

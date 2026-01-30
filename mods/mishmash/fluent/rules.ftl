@@ -121,14 +121,24 @@ faction-soviet =
      Aggresive Playstyle
 
 faction-yuri =
-    .name = Yuri
-    .description = Yuri
+    .name = Yuri's Army
+    .description = Yuri's Army
      
      Highly tactical, sneaky, and unit-efficient, excelling at controlling the battlefield.
       
      Mind Control Domination
      Unconventional Warfare
      Defensive Playstyle
+
+faction-zombie =
+    .name = Zombies
+    .description = Zombies
+     
+     Mass Infantry Assaults backed by strong units.
+      
+     Infinite Resource
+     Attritional Warfare
+     Aggressive Playstyle
 
 faction-gdi =
     .name = GDI

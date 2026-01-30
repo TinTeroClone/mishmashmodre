@@ -1523,7 +1523,6 @@ d2kgunshiphark:
 	icon:
 		Filename: d2kharkonnengunshipcameo.png
 
-
 d2kharkcarryall:
 	Defaults:
 		Scale: 0.8

@@ -51,9 +51,9 @@ harkonnenmcv:
 		Image: d2kmcv
 		PlayerPalette: d2kpal2
 	WithFacingSpriteBody:
+	-WithVoxelBody@Water:
 	-RenderVoxels:
 	-WithVoxelBody:
-	-WithVoxelBody@Water:
 
 #######################################
 # D2K harkonnen Buildings
@@ -1359,8 +1359,6 @@ d2kordosdustscout:
 		FacingTolerance: 0
 	HitShape:
 	WithFacingSpriteBody:
-		MoveSequence: run
-		ValidMovementTypes: Horizontal, Turn
 	WithMoveAnimation:
 		MoveSequence: run
 		ValidMovementTypes: Horizontal, Turn
@@ -1369,6 +1367,7 @@ d2kordosdustscout:
 	RenderSprites:
 		Image: dust_scout_d2k_o
 		PlayerPalette: player_rgba
+	-RenderVoxels:
 
 
 
@@ -1863,9 +1862,9 @@ ordosmcv:
 		Image: d2kmcv
 		PlayerPalette: d2kpal2
 	WithFacingSpriteBody:
+	-WithVoxelBody@Water:
 	-RenderVoxels:
 	-WithVoxelBody:
-	-WithVoxelBody@Water:
 
 #######################################
 # D2K ordos Buildings
@@ -3632,9 +3631,9 @@ atreidesmcv:
 		Image: d2kmcv
 		PlayerPalette: d2kpal2
 	WithFacingSpriteBody:
+	-WithVoxelBody@Water:
 	-RenderVoxels:
 	-WithVoxelBody:
-	-WithVoxelBody@Water:
 
 #######################################
 # D2K atreides Buildings
@@ -5328,7 +5327,6 @@ d2katrediescarryall:
 	Inherits@CHAOS: ^BerserkableAircraft
 	Inherits@MC: ^MindControllable
 	Inherits@RADIATON: ^DamagedByRadiation50PercentAircraft
-	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
 		Name: Atreides Advanced Carryall
 	Tooltip@NoRow:
@@ -5415,7 +5413,6 @@ d2katrediescarryall:
 	RenderSprites:
 		Image: atredies_carryall_a
 		PlayerPalette: player_rgba
-	-WithVoxelBody:
 
 
 d2katreidessiegetank:
@@ -6435,7 +6432,6 @@ ornithopterhusk:
 	RevealOnDeath:
 		Radius: 10c0
 		Duration: 125
-	-WithVoxelBody:
 	WithFacingSpriteBody:
 	BodyOrientation:
 		UseClassicPerspectiveFudge: false
@@ -6599,7 +6595,6 @@ d2kgunship_h_husk:
 	RevealOnDeath:
 		Radius: 10c0
 		Duration: 125
-	-WithVoxelBody:
 	WithFacingSpriteBody:
 	BodyOrientation:
 		UseClassicPerspectiveFudge: false
@@ -6708,7 +6703,6 @@ d2kharkcarryall:
 	Inherits@CHAOS: ^BerserkableAircraft
 	Inherits@MC: ^MindControllable
 	Inherits@RADIATON: ^DamagedByRadiation50PercentAircraft
-	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
 		Name: Harkonnen Advanced Carryall
 	Tooltip@NoRow:
@@ -6809,11 +6803,9 @@ d2kharkcarryall:
 	RenderSprites:
 		Image: d2kharkcarryall
 		PlayerPalette: player_rgba
-	-WithVoxelBody:
 
 d2kharkcarryallhusk:
 	Inherits: ^HelicopterHusk
-	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
 		Name: actor-hind.name
 	Tooltip@NoRow:
@@ -6840,7 +6832,6 @@ d2kharkcarryallhusk:
 	RenderSprites:
 		Image: d2kharkcarryall
 		PlayerPalette: player_rgba
-	-WithVoxelBody:
 
 d2kairdefenseplatform_h:
 	Inherits: ^Helicopter
@@ -6978,7 +6969,6 @@ d2kairdefenseplatform_h:
 
 d2kairdefenseplatform_h_husk:
 	Inherits: ^HelicopterHusk
-	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
 		Name: actor-hind.name
 	Tooltip@NoRow:
@@ -7005,4 +6995,3 @@ d2kairdefenseplatform_h_husk:
 	RenderSprites:
 		Image: d2kadp
 		PlayerPalette: player_rgba
-	-WithVoxelBody:

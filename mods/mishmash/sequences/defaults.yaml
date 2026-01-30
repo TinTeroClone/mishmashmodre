@@ -400,3 +400,34 @@
 	muzzle-2:
 		Filename: conquer|vtmuzzle.shp
 		Length: *
+
+dig:
+	Defaults:
+		Filename: dig_t.shp
+		BasePalette: effect
+	idle:
+		Length: *
+		ZOffset: 511
+		Offset: 0, 0
+	smallidle:
+		Length: *
+		ZOffset: 511
+		Offset: 0, 0
+		Scale: 0.5
+	smallidleoffset:
+		Length: *
+		ZOffset: 511
+		Offset: 0, -12
+		Scale: 0.5
+	mine-dig:
+		Length: *
+		ZOffset: -512
+		Offset: 0, 1.8, -1.8
+		Scale: 0.8
+		Tick: 30
+	ticktnk-dig:
+		Length: *
+		ZOffset: -512
+		Offset: -3, 3, -3
+		Scale: 0.6
+		Tick: 25

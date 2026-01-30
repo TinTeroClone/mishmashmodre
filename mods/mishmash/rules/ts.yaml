@@ -60,7 +60,7 @@ gdimcv:
 		VoiceSet: TSVehicle
 	RenderVoxels:
 		Image: tsmcv
-		Scale: 12.0
+		Scale: 15.0
 		LightAmbientColor: 0.6, 0.6, 0.6
 		LightDiffuseColor: 0.4, 0.4, 0.4
 		LightPitch: 142
@@ -773,7 +773,7 @@ tsharv:
 		Image: tsharv
 	RenderVoxels:
 		Image: tsharv
-		Scale: 12
+		Scale: 15
 		LightAmbientColor: 0.6, 0.6, 0.6
 		LightDiffuseColor: 0.4, 0.4, 0.4
 		LightPitch: 142
@@ -1064,7 +1064,7 @@ tshvrmlrs:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
 	RenderVoxels:
 		Image: tshvr
-		Scale: 12.0
+		Scale: 15.0
 		LightAmbientColor: 0.6, 0.6, 0.6
 		LightDiffuseColor: 0.4, 0.4, 0.4
 		LightPitch: 142
@@ -2329,7 +2329,7 @@ nodmcv:
 		VoiceSet: TSMCVNOD
 	RenderVoxels:
 		Image: tsmcvblack
-		Scale: 12.0
+		Scale: 15.0
 		LightAmbientColor: 0.6, 0.6, 0.6
 		LightDiffuseColor: 0.4, 0.4, 0.4
 		LightPitch: 142
@@ -2428,7 +2428,7 @@ tsharvnod:
 		VoiceSet: nodharv
 	RenderVoxels:
 		Image: tsnodharv
-		Scale: 1
+		Scale: 1.5
 		LightAmbientColor: 0.6, 0.6, 0.6
 		LightDiffuseColor: 0.4, 0.4, 0.4
 		LightPitch: 142
@@ -3814,7 +3814,7 @@ tsticktank:
 		Image: tsttnksprite
 	RenderVoxels:
 		Image: tsttnkvoxel
-		Scale: 12.0
+		Scale: 15.0
 		LightAmbientColor: 0.6, 0.6, 0.6
 		LightDiffuseColor: 0.4, 0.4, 0.4
 		LightPitch: 142
@@ -4091,7 +4091,7 @@ tsnodartillery:
 	WithVoxelBody:
 	RenderVoxels:
 		Image: tsart2
-		Scale: 12.0
+		Scale: 14.0
 		LightAmbientColor: 0.6, 0.6, 0.6
 		LightDiffuseColor: 0.4, 0.4, 0.4
 		LightPitch: 142
@@ -4205,7 +4205,7 @@ tssubapcnod:
 		Image: tssapc
 	RenderVoxels:
 		Image: tssapc
-		Scale: 12.0
+		Scale: 15.0
 		LightAmbientColor: 0.6, 0.6, 0.6
 		LightDiffuseColor: 0.4, 0.4, 0.4
 		LightPitch: 142

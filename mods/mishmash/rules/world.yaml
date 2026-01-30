@@ -258,12 +258,12 @@
 		Description: faction-ordos.description
 		Side: Dune
 		Selectable: true
-	#Faction@tkm:
-		#Name: TKM
-		#InternalName: tkm
-		#Description: faction-tkm.description
-		#Side: Original Factions
-		#Selectable: true
+	Faction@tkm:
+		Name: TKM
+		InternalName: tkm
+		Description: faction-tkm.description
+		Side: Original Factions
+		Selectable: true
 	Faction@zombie:
 		Name: Zombies
 		InternalName: zombie

@@ -847,6 +847,8 @@ tssmech:
 	WithAttackOverlay@muzzle:
 		Sequence: shoot-muzzle
 		IsDecoration: true
+	WithMakeAnimation:
+		Sequence: deploy
 	Voiced:
 		VoiceSet: TSVehicle
 	ProducibleWithLevel@1:
@@ -2374,7 +2376,7 @@ nodrefinery:
 	Building:
 		Footprint: xxX+ xx++ xxX+
 		Dimensions: 4,3
-		LocalCenterOffset: 0,-800,0
+		LocalCenterOffset: 250,-400,0
 	FreeActor:
 		Actor: tsharvnod
 	SmokeParticleEmitter@refinerysmoke1:

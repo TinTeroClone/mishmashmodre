@@ -5,6 +5,7 @@
 tkmcommandcenter:
 	Defaults:
 		Filename: sgcnst.shp
+		Offset: 0,-34,0
 	idle:
 		Filename: sgcnst.shp
 		Length: 1
@@ -38,6 +39,8 @@ tkmcommandcenter:
 tkmbarracks:
 	Defaults:
 		Filename: ugbarr.shp
+		Scale: 0.8
+		Offset: 0,-20,0
 	build:
 		Filename: invisibleitem.shp
 	idle:
@@ -61,6 +64,8 @@ tkmbarracks:
 tkmpowerplant:
 	Defaults:
 		Filename: ugpowr.shp
+		Scale: 0.8
+		Offset: 25,-20,0
 	build:
 		Filename: invisibleitem.shp
 	idle:
@@ -84,7 +89,8 @@ tkmpowerplant:
 tkmrefinery:
 	Defaults:
 		Filename: tkmsupplycenter.png
-		Scale: 0.4
+		LocalCenterOffset: 0,-8,0
+		Scale: 0.3
 	idle:
 		Filename: tkmsupplycenter.png
 		Length: *
@@ -333,9 +339,13 @@ tkmbunkertankturret:
 #######################################
 
 tkmrifleman:
+	Inherits@BasicDie: ^BasicDie
 	Defaults:
 		Filename: poncho.shp
-		Scale: 1
+		Scale: 0.8
+	paradrop:
+		Filename: poncho.shp
+		Facings: 1
 	stand:
 		Facings: 8
 		ShadowStart: 248
@@ -378,6 +388,10 @@ tkmrifleman:
 		Start: 209
 		Length: 19
 		ShadowStart: 456
+	die3:
+		Start: 209
+		Length: 19
+		ShadowStart: 456
 	garrison-muzzle:
 		Filename: minigun.shp
 		Length: 3
@@ -394,7 +408,10 @@ tkmtrooper:
 	Inherits: tkmrifleman
 	Defaults:
 		Filename: tkmtrooper.shp
-		Scale: 1
+		Scale: 0.8
+	paradrop:
+		Filename: tkmtrooper.shp
+		Facings: 1
 	stand:
 		Facings: 8
 		ShadowStart: 496
@@ -453,6 +470,9 @@ tkmspetsnaz:
 	Defaults:
 		Filename: spetsnazidle.png
 		Scale: 0.6
+	paradrop:
+		Filename: spetsnazidle.png
+		Facings: 1
 	stand:
 		Filename: spetsnazidle.png
 		Facings: 8
@@ -508,7 +528,10 @@ tkmspetsnaz:
 tkmrocketeer:
 	Defaults:
 		Filename: nodrocket.shp
-		Scale: 1
+		Scale: 0.8
+	paradrop:
+		Filename: nodrocket.shp
+		Facings: 1
 	stand:
 		Facings: 8
 		ShadowStart: 468
@@ -566,7 +589,10 @@ tkmrocketeer:
 tkmjug:
 	Defaults:
 		Filename: tkmjug.shp
-		Scale: 0.9
+		Scale: 0.8
+	paradrop:
+		Filename: tkmjug.shp
+		Facings: 1
 	stand:
 		Facings: 8
 		ShadowStart: 255
@@ -666,7 +692,10 @@ tkmthermonaut:
 tkmengineer:
 	Defaults:
 		Filename: hijacker.shp
-		Scale: 0.9
+		Scale: 0.8
+	paradrop:
+		Filename: hijacker.shp
+		Facings: 1
 	stand:
 		Facings: 8
 		Length: 1
@@ -738,6 +767,10 @@ tkmharv:
 		Filename: tkmsupplytruck.png
 	idle:
 		Facings: -32
+	harvest:
+		Filename: conquer|oregath.shp
+		Length: 15
+		Facings: 8
 	icon:
 		Filename: tkmsupplytruckicon.png
 

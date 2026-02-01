@@ -25,6 +25,12 @@ tkmcnst:
 		ProductionType: Building.tkm
 	ProductionBar@Support:
 		ProductionType: Support.tkm
+	ProvidesPrerequisite@upgrade.tkm:
+		Prerequisite: upgrade.tkm
+		RequiresCondition: !powerdown
+	ProvidesPrerequisite@upgrade.tkm:
+		Prerequisite: upgrade.tkm
+		Factions: tkm
 	Transforms:
 		IntoActor: tkmmcv
 	GrantConditionOnFaction@tkm:
@@ -63,7 +69,7 @@ powrtkm:
 	Buildable:
 		Queue: Building.Shared, Building.tkm
 		Description: actor-napowr.description
-		Prerequisites: ~tkmcnst, ~techlevel.1
+		Prerequisites: ~tkmcnst, ~techlevel.1, ~tkmbase
 		LocalCenterOffset: 0,-512,0
 		IconPalette: chromedune
 	Tooltip:
@@ -88,7 +94,7 @@ tkmbarracks:
 	Buildable:
 		Queue: Building.Shared, Building.tkm
 		Description: actor-nahand.description
-		Prerequisites: ~tkmcnst, powrtkm, ~techlevel.1
+		Prerequisites: ~tkmcnst, powrtkm, ~techlevel.1, ~tkmbase
 		IconPalette: chromedune
 	Building:
 		Footprint: xxx xxx xxx
@@ -226,7 +232,7 @@ tkmrefinery:
 	Inherits: ^Refinery
 	Buildable:
 		Queue: Building.Shared, Building.tkm
-		Prerequisites: ~tkmcnst, powrtkm, ~!global-megawealth, ~techlevel.1, ~AIantiRush
+		Prerequisites: ~tkmcnst, powrtkm, ~!global-megawealth, ~techlevel.1, ~AIantiRush, ~tkmbase
 		IconPalette: chromedune
 	Building:
 		Footprint: xxx xxx
@@ -244,6 +250,157 @@ tkmrefinery:
 	RenderSprites:
 		Image: tkmrefinery
 		PlayerPalette: player_rgba
+
+tkmfactory:
+	Inherits: ^WarFactory
+	Inherits@shape: ^3x4Shape
+	Buildable:
+		Queue: Building.tkm
+		Description: actor-naweap.description
+		Prerequisites: ~tkmcnst, tkmrefinery, ~tkmbase
+	Building:
+		Footprint: xxx xxx xxx xxx
+		Dimensions: 3,4
+		LocalCenterOffset: 250,-600,0
+	Exit@1:
+		SpawnOffset: -200,800,0
+		ExitCell: 3,2
+		ExitDelay: 3
+	ProvidesPrerequisite@vehicle.tkm:
+		Prerequisite: vehicle.tkm
+		Factions: tkm
+	Production:
+		Produces: Vehicle.tkm
+	ProductionQueue:
+		Type: Vehicle.tkm
+		DisplayOrder: 18
+		Factions: tkm
+	ProductionBar:
+		ProductionType: Vehicle.tkm
+	WithExitOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+		Sequence: build-door
+	IsometricSelectable:
+		Class: naweap
+		DecorationHeight: 90
+	RenderSprites:
+		Image: tkmfactory
+	-WithIdleOverlay@bib:
+	-WithExitOverlay@front:
+	-WithExitOverlay@top:
+
+tkmradarvan:
+	Inherits: ^Radar
+	Inherits@SHAPE: ^1x1Shape
+	Inherits@AI: ^AIControl
+	Buildable:
+		Queue: Building.Shared, Building.tkm
+		Prerequisites: ~tkmcnst, tkmrefinery, ~tkmbase
+		Description: actor-naradr.description
+		IconPalette: chromedune
+	ProvidesPrerequisite@AIbuildinglimit:
+		RequiresCondition: ai-control
+		Prerequisite: ai.naradr
+	Tooltip:
+		Name: Intel Van
+	Tooltip@NoRow:
+		Name: Intel Van
+	ProvidesPrerequisite:
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+		LocalCenterOffset: 0,-512,0
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp
+	IsometricSelectable:
+		DecorationHeight: 30
+	RenderSprites:
+		Image: tkmradar
+		Scale: 1.5
+
+tkmairpad:
+	Inherits: ^Helipad
+	Inherits@shape: ^3x3Shape
+	Buildable:
+		Queue: Building.Shared, Building.tkm
+		Prerequisites: ~tkmcnst, ~tkmbase, tkmradarvan
+	ProvidesPrerequisite@AIbuildinglimit:
+		RequiresCondition: ai-control
+		Prerequisite: ai.tkmtech
+	Tooltip:
+		Name: Airpad
+	Tooltip@NoRow:
+		Name: Airpad
+	Production:
+		Produces: Aircraft.tkm
+	ProductionQueue:
+		Type: Aircraft.tkm
+		Factions: tkm
+	ProductionQueue@tkm:
+		Type: Aircraft.tkm
+		Group: Aircraft
+		DisplayOrder: 26
+		LowPowerModifier: 200
+		Factions: tkm
+		ReadyAudio: UnitReady
+		ReadyTextNotification: notification-unit-ready
+		BlockedAudio: NoBuild
+		BlockedTextNotification: notification-unable-to-build-more
+		LimitedAudio: BuildingInProgress
+		LimitedTextNotification: notification-unable-to-comply-building-in-progress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar:
+		ProductionType: Aircraft.tkm
+	ProvidesPrerequisite:
+	Health:
+		HP: 75000
+	Armor:
+		Type: Wood
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	Targetable:
+		TargetTypes: Ground, C4, DetonateAttack, Structure, NonGarrisonableStructure, SpyInfiltrate, HijackerInfiltrate, DiskInfiltrateAllied
+	Targetable@Water:
+		TargetTypes: Ground, Water, WaterStructure, C4, SpyInfiltrate, HijackerInfiltrate, DiskInfiltrateAllied
+	IsometricSelectable:
+		Class: tkmtech
+		DecorationHeight: 50
+	Voiced:
+		VoiceSet: TechCenterVoice
+		Volume: 0.8
+	RenderSprites:
+		Image: tkmairpad
+		PlayerPalette: player_rgba
+
+tkmtechcenter:
+	Inherits: ^BattleLab
+	Inherits@shape: ^3x4Shape
+	Inherits@AI: ^AIControl
+	Buildable:
+		Queue: Building.Shared, Building.tkm
+		Prerequisites: ~tkmcnst, ~tkmbase, tkmairpad
+		Description: actor-naradr.description
+	ProvidesPrerequisite@AIbuildinglimit:
+		RequiresCondition: ai-control
+		Prerequisite: ai.naradr
+	Tooltip:
+		Name: Research Centre
+	Tooltip@NoRow:
+		Name: Research Centre
+	ProvidesPrerequisite:
+	Building:
+		Footprint: xxx xxx xxx xxx
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || emp
+	IsometricSelectable:
+		DecorationHeight: 90
+	RenderSprites:
+		Image: tkmtechcenter
 
 #######################################
 # TKM Vehicles
@@ -280,9 +437,322 @@ tkmharv:
 		Image: blanktemplate
 		
 #######################################
+# TKM Defenses
+#######################################
+
+tkmbunker:
+	Inherits: ^SupportBuilding
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@MC: ^MindControllableBuilding
+	Buildable:
+		Queue: Support.Shared, Support.tkm
+		BuildPaletteOrder: 40
+		Prerequisites: ~tkmcnst, tkmbarracks, ~techlevel.1
+		Description: actor-gapill.description
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: actor-gapill.name
+	Tooltip@NoRow:
+		Name: actor-gapill.name
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	Health:
+		HP: 40000
+	Armor:
+		Type: Steel
+	RevealsShroud:
+		Range: 7c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 7c0
+	DetectCloaked:
+		Range: 5c0
+	RenderDetectionCircle:
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithRangeCircle:
+		Range: 6c0
+		Type: pillbox
+	AutoTarget:
+	RequiresBuildableArea:
+		Adjacent: 4
+	IsometricSelectable:
+		Class: gapill
+		DecorationHeight: 15
+	Cargo:
+		Types: Garrisoner
+		MaxWeight: 4
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		EjectOnDeathDamage: 0
+		LoadedCondition: loaded
+	WithCargoSounds:
+		EnterSounds: ugarris.wav
+		ExitSounds: ugarris.wav
+	WithCargoPipsDecoration:
+		EmptySequence: pip-garrison-empty
+		FullSequence: pip-garrison-green
+		Margin: 4, 3
+		PipStride: 4, 2
+		Palette: ra
+		Position: BottomLeft
+		RequiresSelection: true
+		CustomPipSequences:
+			gray: pip-garrison-gray
+			yellow: pip-garrison-yellow
+			blue: pip-garrison-blue
+			red: pip-garrison-red
+	AttackOpenTopped:
+		Armaments: garrisoned, garrisoned-secondary
+		PortOffsets: 768,0,1024, 448,-682,1024, -448,-682,1024, -768,0,1024, -448,682,1024, 448,682,1024
+		PauseOnCondition: build-incomplete || chronodisable
+	Voiced:
+		VoiceSet: PillBoxVoice
+		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, Cargo
+	RenderSprites:
+		Image: tkmbunker
+		PlayerPalette: player_rgba
+	
+tkmtankbunker:
+	Inherits: ^SupportBuilding
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@MC: ^MindControllableBuilding
+	Buildable:
+		Queue: Support.Shared, Support.tkm
+		BuildPaletteOrder: 40
+		Prerequisites: ~tkmcnst, tkmbarracks, ~techlevel.1
+		Description: actor-gapill.description
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: actor-gapill.name
+	Tooltip@NoRow:
+		Name: actor-gapill.name
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	Health:
+		HP: 40000
+	Armor:
+		Type: Steel
+	RevealsShroud:
+		Range: 7c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 7c0
+	Armament:
+		Weapon: 105mm
+		LocalOffset: 416,0,416
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+		PauseOnCondition: build-incomplete || chronodisable
+	DetectCloaked:
+		Range: 5c0
+	RenderDetectionCircle:
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithRangeCircle:
+		Range: 6c0
+		Type: pillbox
+	AutoTarget:
+	RequiresBuildableArea:
+		Adjacent: 4
+	IsometricSelectable:
+		Class: gapill
+		DecorationHeight: 15
+	WithCargoSounds:
+		EnterSounds: ugarris.wav
+		ExitSounds: ugarris.wav
+	AttackOpenTopped:
+		Armaments: garrisoned, garrisoned-secondary
+		PortOffsets: 768,0,1024, 448,-682,1024, -448,-682,1024, -768,0,1024, -448,682,1024, 448,682,1024
+		PauseOnCondition: build-incomplete || chronodisable
+	Voiced:
+		VoiceSet: PillBoxVoice
+		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, None, Damage, ReloadDelay, MaxRange
+		Damage: 65
+	Turreted:
+		TurnSpeed: 30
+		Offset: 0,0,200
+	WithSpriteTurret:
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tkmbunkertankturret
+	
+tkmquadbunker:
+	Inherits: ^SupportBuilding
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@MC: ^MindControllableBuilding
+	Buildable:
+		Queue: Support.Shared, Support.tkm
+		BuildPaletteOrder: 40
+		Prerequisites: ~tkmcnst, tkmbarracks, ~techlevel.1
+		Description: actor-gapill.description
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: actor-gapill.name
+	Tooltip@NoRow:
+		Name: actor-gapill.name
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	Health:
+		HP: 40000
+	Armor:
+		Type: Steel
+	RevealsShroud:
+		Range: 7c0
+	# RevealsShroudToIntelligenceOwner:
+	#	Types: SatelliteScan
+	#	Range: 7c0
+	WithMuzzleOverlay:
+	AttackTurreted:
+		PauseOnCondition: build-incomplete || chronodisable
+	DetectCloaked:
+		Range: 5c0
+	RenderDetectionCircle:
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithRangeCircle:
+		Range: 6c0
+		Type: pillbox
+	AutoTarget:
+	RequiresBuildableArea:
+		Adjacent: 4
+	IsometricSelectable:
+		Class: gapill
+		DecorationHeight: 15
+	WithCargoSounds:
+		EnterSounds: ugarris.wav
+		ExitSounds: ugarris.wav
+	Armament@ag-0:
+		Weapon: AGGattCann
+		LocalOffset: 640,240,1024, 640,-240,1024
+		MuzzleSequence: muzzle
+		ReloadingCondition: reload-ground
+		PauseOnCondition: reload-air
+		RequiresCondition: !gatling
+	Armament@ag-1:
+		Weapon: AGGattCann2
+		LocalOffset: 640,240,1024, 640,-240,1024
+		MuzzleSequence: muzzle-1
+		ReloadingCondition: reload-ground
+		PauseOnCondition: reload-air
+		RequiresCondition: gatling == 1
+	Armament@ag-2:
+		Weapon: AGGattCann3
+		LocalOffset: 640,240,1024, 640,-240,1024
+		MuzzleSequence: muzzle-2
+		ReloadingCondition: reload-ground
+		PauseOnCondition: reload-air
+		RequiresCondition: gatling >= 2
+	Armament@ag-line-0:
+		Name: secondary
+		Weapon: AGGattCannLine
+		LocalOffset: 640,240,1024, 640,-240,1024
+		ReloadingCondition: reload-line-ground
+		PauseOnCondition: reload-line-air
+		RequiresCondition: !gatling && chainguns
+	Armament@ag-line-1:
+		Name: secondary
+		Weapon: AGGattCannLine2
+		LocalOffset: 640,240,1024, 640,-240,1024
+		ReloadingCondition: reload-line-ground
+		PauseOnCondition: reload-line-air
+		RequiresCondition: gatling == 1 && chainguns
+	Armament@ag-line-2:
+		Name: secondary
+		Weapon: AGGattCannLine3
+		LocalOffset: 640,240,1024, 640,-240,1024
+		ReloadingCondition: reload-line-ground
+		PauseOnCondition: reload-line-air
+		RequiresCondition: gatling >= 2 && chainguns
+	Armament@aa-0:
+		Weapon: AAGattCann
+		LocalOffset: 640,240,1024, 640,-240,1024
+		MuzzleSequence: muzzle
+		ReloadingCondition: reload-air
+		PauseOnCondition: reload-ground
+		RequiresCondition: !gatling
+	Armament@aa-1:
+		Weapon: AAGattCann2
+		LocalOffset: 640,240,1024, 640,-240,1024
+		MuzzleSequence: muzzle-1
+		ReloadingCondition: reload-air
+		PauseOnCondition: reload-ground
+		RequiresCondition: gatling == 1
+	Armament@aa-2:
+		Weapon: AAGattCann3
+		LocalOffset: 640,240,1024, 640,-240,1024
+		MuzzleSequence: muzzle-2
+		ReloadingCondition: reload-air
+		PauseOnCondition: reload-ground
+		RequiresCondition: gatling >= 2
+	Armament@aa-line-0:
+		Name: secondary
+		Weapon: AAGattCannLine
+		LocalOffset: 640,240,1024, 640,-240,1024
+		MuzzleSequence: muzzle
+		ReloadingCondition: reload-line-air
+		PauseOnCondition: reload-line-ground
+		RequiresCondition: !gatling && chainguns
+	Armament@aa-line-1:
+		Name: secondary
+		Weapon: AAGattCannLine2
+		LocalOffset: 640,240,1024, 640,-240,1024
+		MuzzleSequence: muzzle-1
+		ReloadingCondition: reload-line-air
+		PauseOnCondition: reload-line-ground
+		RequiresCondition: gatling == 1 && chainguns
+	Armament@aa-line-2:
+		Name: secondary
+		Weapon: AAGattCannLine3
+		LocalOffset: 640,240,1024, 640,-240,1024
+		MuzzleSequence: muzzle-2
+		ReloadingCondition: reload-line-air
+		PauseOnCondition: reload-line-ground
+		RequiresCondition: gatling >= 2 && chainguns
+	GrantConditionOnAttack:
+		Condition: gatling
+		RequiredShotsPerInstance: 12, 24
+		MaximumInstances: 2
+		RevokeDelay: 25
+		RevokeAll: true
+		IsCyclic: false
+		RevokeOnNewTarget: false
+	Voiced:
+		VoiceSet: PillBoxVoice
+		Volume: 0.8
+	ActorStatValues:
+		Stats: Armor, Sight, None, Damage, ReloadDelay, MaxRange
+		Damage: 65
+	Turreted:
+		TurnSpeed: 30
+		Offset: 0,0,200
+	WithSpriteTurret:
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tkmbunkerquadturret
+	
+#######################################
 # TKM Infantry
 #######################################
-	
+
 tkmrifleman:
 	Inherits: ^Infantry
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -294,7 +764,7 @@ tkmrifleman:
 	Buildable:
 		Queue: Infantry.Shared, Infantry.tkm
 		BuildAtProductionType: Soldier
-		Prerequisites: ~tkmbarracks
+		Prerequisites: ~tkmbarracks, ~upberezka
 		BuildPaletteOrder: 10
 		Description: actor-e2.description
 		BuildDuration: 50
@@ -331,13 +801,13 @@ tkmrifleman:
 		FacingTolerance: 2
 	Armament@primary:
 		Weapon: BoltRifle
-		Damage: 18
+		Damage: 45
 		LocalOffset: 500,0,400
 		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: BoltRifleE
-		Damage: 30
+		Damage: 90
 		LocalOffset: 500,0,400
 		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
@@ -386,7 +856,7 @@ tkmtrooper:
 	Buildable:
 		Queue: Infantry.Shared, Infantry.tkm
 		BuildAtProductionType: Soldier
-		Prerequisites: ~tkmbarracks
+		Prerequisites: ~tkmbarracks, ~upnato
 		BuildPaletteOrder: 10
 		Description: actor-e2.description
 		BuildDuration: 50
@@ -478,7 +948,7 @@ tkmspetsnaz:
 	Buildable:
 		Queue: Infantry.Shared, Infantry.tkm
 		BuildAtProductionType: Soldier
-		Prerequisites: ~tkmbarracks
+		Prerequisites: ~tkmbarracks, ~uptitan
 		BuildPaletteOrder: 10
 		Description: actor-e2.description
 		BuildDuration: 50
@@ -740,18 +1210,21 @@ tkmjug:
 	Armament@ag-0:
 		Weapon: AGGattTrop
 		LocalOffset: 544,100,768
+		MuzzleSequence: muzzle
 		ReloadingCondition: reload-ground
 		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: !gatling
 	Armament@ag-1:
 		Weapon: AGGattTrop2
 		LocalOffset: 544,100,768
+		MuzzleSequence: muzzle-1
 		ReloadingCondition: reload-ground
 		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: gatling == 1
 	Armament@ag-2:
 		Weapon: AGGattTrop3
 		LocalOffset: 544,100,768
+		MuzzleSequence: muzzle-2
 		ReloadingCondition: reload-ground
 		PauseOnCondition: chronodisable || webdisable || dogstun || reload-air
 		RequiresCondition: gatling >= 2
@@ -1127,10 +1600,12 @@ tkmvon:
 		TargetFrozenActors: true
 	Armament@primary:
 		Weapon: VonRifle
+		LocalOffset: 500,0,400
 		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: !rank-elite
 	Armament@elite:
 		Weapon: VonRifleE
+		LocalOffset: 500,0,400
 		PauseOnCondition: chronodisable || webdisable || dogstun
 		RequiresCondition: rank-elite
 	Armament@opentopped:

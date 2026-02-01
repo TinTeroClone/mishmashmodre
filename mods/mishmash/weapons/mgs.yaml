@@ -987,7 +987,7 @@ TSAssaultCannonE:
 		Explosions: piffpiffred
 
 BoltRifle:
-	Inherits: ^MG
+	Inherits: 20mm
 	ReloadDelay: 70
 	Range: 6000
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav, nax_rifle4.wav, nax_rifle5.wav
@@ -1005,10 +1005,10 @@ BoltRifle:
 		ValidTargets: Ground, Water, Air
 	Warhead@1Dam: SpreadDamage
 		Spread: 64
-		Damage: 1800
+		Damage: 4500
 
 BoltRifleE:
-	Inherits: ^MG
+	Inherits: 20mm
 	ReloadDelay: 30
 	Range: 8000
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav, nax_rifle4.wav, nax_rifle5.wav
@@ -1026,11 +1026,11 @@ BoltRifleE:
 		ValidTargets: Ground, Water, Air
 	Warhead@1Dam: SpreadDamage
 		Spread: 64
-		Damage: 3000
+		Damage: 9000
 		ValidTargets: Ground, Water, Air
 
 VonRifle:
-	Inherits: ^MG
+	Inherits: 20mm
 	ReloadDelay: 70
 	Range: 15000
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav, nax_rifle4.wav, nax_rifle5.wav
@@ -1051,7 +1051,7 @@ VonRifle:
 		Damage: 20000
 
 VonRifleE:
-	Inherits: ^MG
+	Inherits: 20mm
 	ReloadDelay: 30
 	Range: 15000
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav, nax_rifle4.wav, nax_rifle5.wav

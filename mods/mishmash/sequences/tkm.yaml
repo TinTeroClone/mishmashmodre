@@ -40,7 +40,7 @@ tkmbarracks:
 	Defaults:
 		Filename: ugbarr.shp
 		Scale: 0.8
-		Offset: 0,-20,0
+		Offset: 0,-40,0
 	build:
 		Filename: invisibleitem.shp
 	idle:
@@ -65,7 +65,7 @@ tkmpowerplant:
 	Defaults:
 		Filename: ugpowr.shp
 		Scale: 0.8
-		Offset: 25,-20,0
+		Offset: 20,-40,0
 	build:
 		Filename: invisibleitem.shp
 	idle:
@@ -89,8 +89,8 @@ tkmpowerplant:
 tkmrefinery:
 	Defaults:
 		Filename: tkmsupplycenter.png
-		LocalCenterOffset: 0,-8,0
-		Scale: 0.3
+		Offset: 0,-42,0
+		Scale: 0.2
 	idle:
 		Filename: tkmsupplycenter.png
 		Length: *
@@ -162,6 +162,7 @@ tkmworker:
 tkmfactory:
 	Defaults:
 		Filename: ugarms.shp
+		Offset: 0,-42,0
 	idle:
 		Filename: ugarms.shp
 		ShadowStart: 3
@@ -218,6 +219,8 @@ tkmradar:
 tkmtechcenter:
 	Defaults:
 		Filename: ugpala.shp
+		Offset: 12,-42,0
+		Scale: 0.9
 	build:
 		Filename: invisibleitem.shp
 	idle:
@@ -241,7 +244,7 @@ tkmtechcenter:
 tkmbunker:
 	Defaults:
 		Filename: tkmbunker.png
-		Scale: 0.7
+		Scale: 0.5
 	idle:
 		Start: 20
 		Length: 1
@@ -294,14 +297,48 @@ tkmbunkerquadturret:
 	make:
 		Length: 20
 		Tick: 80
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
 	turret:
 		Filename: tkmquadtruckturret.png
 		Facings: -32
 		Scale: 0.5
+		Offset: 0,-14,0
+	muzzle:
+		Offset: 0,-14,0
+		Combine:
+			0:
+				Filename: mgun-n.shp
+				Length: 6
+			1:
+				Filename: mgun-nw.shp
+				Length: 6
+			2:
+				Filename: mgun-w.shp
+				Length: 6
+			3:
+				Filename: mgun-sw.shp
+				Length: 3
+			4:
+				Filename: mgun-s.shp
+				Length: 6
+			5:
+				Filename: mgun-se.shp
+				Length: 6
+			6:
+				Filename: mgun-e.shp
+				Length: 6
+			7:
+				Filename: mgun-ne.shp
+				Length: 6
+		Facings: 8
+		Length: 3
+	muzzle-1:
+		Filename: conquer|gunfire.shp
+		Length: *
+		Offset: 0,-14,0
+	muzzle-2:
+		Filename: conquer|vtmuzzle.shp
+		Length: *
+		Offset: 0,-14,0
 	icon:
 		Filename: tkmquadturreticon.png
 		AddExtension: False
@@ -309,7 +346,7 @@ tkmbunkerquadturret:
 tkmbunkertankturret:
 	Defaults:
 		Filename: tkmbunker.png
-		Scale: 0.7
+		Scale: 0.5
 	idle:
 		Start: 20
 		Length: 1
@@ -329,7 +366,8 @@ tkmbunkertankturret:
 	turret:
 		Filename: technicaltankturret.png
 		Facings: -32
-		Scale: 0.8
+		Scale: 0.5
+		Offset: 0,-14,0
 	icon:
 		Filename: tkmtankturreticon.png
 		AddExtension: False
@@ -469,7 +507,7 @@ tkmtrooper:
 tkmspetsnaz:
 	Defaults:
 		Filename: spetsnazidle.png
-		Scale: 0.6
+		Scale: 0.5
 	paradrop:
 		Filename: spetsnazidle.png
 		Facings: 1
@@ -738,11 +776,57 @@ tkmengineer:
 		AddExtension: False
 
 tkmvon:
-	Inherits: ^ArmedInfantry
 	Defaults:
-		Filename: conquer|snipe.shp
+		Filename: jarmen.shp
+		Scale: 0.9
 	paradrop:
-		Start: 292
+		Start: 128
+		ShadowStart: 332
+	stand:
+		Facings: 8
+		Length: 1
+		ShadowStart: 205
+	idle1:
+		Start: 129
+		Facings: 1
+		Length: 14
+		ShadowStart: 333
+	idle2:
+		Start: 144
+		Facings: 1
+		Length: 14
+		ShadowStart: 348
+	idle3:
+		Start: 159
+		Facings: 1
+		Length: 14
+		ShadowStart: 363
+	die:
+		Start: 175
+		Facings: 1
+		Length: 14
+		ShadowStart: 379
+	die1:
+		Start: 175
+		Facings: 1
+		Length: 14
+		ShadowStart: 379
+	die2:
+		Start: 175
+		Facings: 1
+		Length: 14
+		ShadowStart: 379
+	run:
+		Start: 8
+		Length: 9
+		Facings: 8
+		Tick: 80
+		ShadowStart: 212
+	shoot:
+		Start: 80
+		Facings: 8
+		Length: 6
+		ShadowStart: 284
 	icon:
 		Filename: tkmvonicon.png
 
